@@ -21,7 +21,7 @@ class QuestionController < Rotary::Controller
 
       require 'ox'
 
-      response[:type] = 'json'
+      response[:type] = 'xml'
 
       response[:content] = Ox.dump(content, {})
 
