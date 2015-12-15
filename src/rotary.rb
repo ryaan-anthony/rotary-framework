@@ -1,49 +1,31 @@
 #!/usr/bin/ruby
 require_relative 'app/bootstrap'
 
-# require_relative 'app/models/input_validator'
-# validator = InputValidator.new
-#
-# require_relative 'app/controllers/question_controller'
-# QuestionController.new(
-#     :arguments    => Proc.new { ARGV },
-#     :input_stream => Proc.new { STDIN },
-#     :validator    => Proc.new { validator }
-# ).ask
-
 require 'sinatra'
 
-payload = {
+request = {
     response: 'Hello Rotary',
     errors: []
 }
 
 get '/*.*' do |path,ext|
 
-  payload[:request] = path
+  request[:path] = path.split('/')
 
-  if ext == 'json'
+  request[:params] = params
 
-    require 'json'
+  request[:format] = ext
 
-    content_type :json
+  controller = Rotary::Config::DATA[:controller_mapping][path.to_sym]
 
-    halt payload.to_json
+  if controller.class == Proc
 
-  end
+    response = controller.call.action(request)
 
-  if ext == 'xml'
+    content_type response[:type].to_sym
 
-    require 'ox'
-
-    content_type :xml
-
-    halt Ox.dump(payload)
+    body response[:content]
 
   end
-
-  raise 'Requested format not available'
 
 end
-
-

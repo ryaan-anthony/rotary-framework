@@ -1,22 +1,34 @@
 class QuestionController < Rotary::Controller
 
-  def ask
+  def action(request)
 
-    @validator.validate_request(@arguments)
+    # todo replace with real content
+    content = request
 
-    question, answer = @arguments
+    response = {}
 
-    response = ask_question(question)
+    if request[:format] == 'json'
 
-    puts 'Correct!' if @validator.same(answer, response)
+      require 'json'
 
-  end
+      response[:type] = 'json'
 
-  protected
+      response[:content] = content.to_json
 
-  def ask_question(question)
-    puts question
-    get_response
+    end
+
+    if request[:format] == 'xml'
+
+      require 'ox'
+
+      response[:type] = 'json'
+
+      response[:content] = Ox.dump(content, {})
+
+    end
+
+    response
+
   end
 
 end
