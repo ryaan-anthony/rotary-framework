@@ -10,10 +10,19 @@ require_relative 'app/bootstrap'
 #     :input_stream => Proc.new { STDIN },
 #     :validator    => Proc.new { validator }
 # ).ask
+require 'json'
 require 'sinatra'
 
 get '/' do
-  'Hello Rotary!'
+
+  obj = {
+      response: 'Hello Rotary'
+  }
+
+  content_type :json
+
+  obj.to_json
+
 end
 
 
