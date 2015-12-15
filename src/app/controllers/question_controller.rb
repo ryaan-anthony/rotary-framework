@@ -1,5 +1,4 @@
-require_relative '../../lib/controller'
-class QuestionAsker < Controller
+class QuestionController < Rotary::Controller
 
   def ask
 

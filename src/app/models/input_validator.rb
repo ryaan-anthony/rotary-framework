@@ -1,5 +1,4 @@
-require_relative '../../lib/validator'
-class InputValidator < Validator
+class InputValidator < Rotary::Validator
 
   def validate_request(request)
     request_is_not_empty(request)
