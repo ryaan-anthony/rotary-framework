@@ -25,8 +25,16 @@ get '/*.*' do |path,ext|
 
     content_type response[:type] if response[:type]
 
-    body response[:content] if response[:content]
+    halt body response[:content] if response[:content]
 
   end
+
+  halt 404
+
+end
+
+get '/*' do
+
+  halt 404
 
 end
