@@ -1,4 +1,4 @@
-class QuestionController < Rotary::Controller
+class UsageController < Rotary::Controller
 
   # todo replace with real content
   def get_content

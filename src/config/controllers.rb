@@ -4,7 +4,7 @@ Rotary::Config::DATA[:controller_mapping] = {
       HelpController.new({})
     },
     example_usage: Proc.new {
-      Rotary::Filesystem.new.controller('question_controller')
-      QuestionController.new({})
+      Rotary::Filesystem.new.controller('example/usage_controller')
+      UsageController.new({})
     }
 }
