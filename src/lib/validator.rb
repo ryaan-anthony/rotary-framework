@@ -1,7 +1,15 @@
 class Validator
 
-  def validate
-    false
+  def empty(array)
+    array.length == 0
+  end
+
+  def same(left, right)
+    left == right
+  end
+
+  def different(left, right)
+    left != right
   end
 
 end
