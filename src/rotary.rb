@@ -4,27 +4,28 @@ require_relative 'app/bootstrap'
 require 'sinatra'
 
 request = {
-    response: 'Hello Rotary',
     errors: []
 }
 
 get '/*.*' do |path,ext|
 
-  request[:path] = path.split('/')
+  request[:path] = path
 
   request[:params] = params
 
   request[:format] = ext
 
-  controller = Rotary::Config::DATA[:controller_mapping][path.to_sym]
+  request_symbol = path.split('/').join('_').to_sym
+
+  controller = Rotary::Config::DATA[:controller_mapping][request_symbol]
 
   if controller.class == Proc
 
     response = controller.call.action(request)
 
-    content_type response[:type].to_sym
+    content_type response[:type] if response[:type]
 
-    body response[:content]
+    body response[:content] if response[:content]
 
   end
 

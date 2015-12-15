@@ -23,3 +23,7 @@ Daemonize the API server:
 Make a basic request:
 
 `curl localhost:4567/example/usage.json`
+
+`curl localhost:4567/example/usage.xml`
+
+`curl localhost:4567/help.txt`
