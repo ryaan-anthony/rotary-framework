@@ -10,18 +10,39 @@ require_relative 'app/bootstrap'
 #     :input_stream => Proc.new { STDIN },
 #     :validator    => Proc.new { validator }
 # ).ask
-require 'json'
+
 require 'sinatra'
 
-get '/' do
+payload = {
+    response: 'Hello Rotary',
+    errors: []
+}
 
-  obj = {
-      response: 'Hello Rotary'
-  }
+get '/*.*' do |path,ext|
 
-  content_type :json
+  payload[:request] = path
 
-  obj.to_json
+  if ext == 'json'
+
+    require 'json'
+
+    content_type :json
+
+    halt payload.to_json
+
+  end
+
+  if ext == 'xml'
+
+    require 'ox'
+
+    content_type :xml
+
+    halt Ox.dump(payload)
+
+  end
+
+  raise 'Requested format not available'
 
 end
 
