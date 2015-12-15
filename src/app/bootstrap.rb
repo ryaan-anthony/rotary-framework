@@ -6,7 +6,6 @@ $:.unshift(base_path + '/lib')
 
 # Define autoloaded components
 module Rotary
-  autoload :Validator,  'validator'
   autoload :Controller, 'controller'
   autoload :Config,     'config'
   autoload :Filesystem, 'filesystem'
