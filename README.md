@@ -22,4 +22,4 @@ Daemonize the API server:
 
 Make a basic request:
 
-`curl localhost:4567`
+`curl localhost:4567/example/usage.json`
